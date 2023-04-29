@@ -248,3 +248,49 @@
   border-radius: 50%;
   transform: scale(1.4);
 }
+
+@media only screen and (max-width: 700px) {
+  .main {
+    padding: 0 !important;
+    justify-content: center;
+  }
+
+  .logoContainer {
+    display: none;
+  }
+
+  .wrapper {
+    margin-top: 40px;
+  }
+
+  .wrapperHeader {
+    width: 100%;
+    height: 70px;
+  }
+
+  .header {
+    font-size: 1rem;
+    visibility: hidden;
+  }
+
+  .status {
+    font-size: 1rem;
+  }
+
+  .elementsItem {
+    min-width: 370px;
+  }
+
+  .elementHeader {
+    font-size: .7rem;
+    margin-right: 1px;
+  }
+
+  .elementDetail {
+    font-size: .8rem;
+  }
+
+  .elementImgContainer {
+    left: -10%;
+  }
+}
