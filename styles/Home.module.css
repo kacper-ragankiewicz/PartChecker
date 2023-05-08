@@ -172,7 +172,7 @@
 }
 
 .elementsItem {
-  min-width: 430px;
+  /* min-width: 430px; */
   width: 32%;
   height: 210px;
   overflow: hidden;
@@ -247,6 +247,23 @@
   background: #57C5B6;
   border-radius: 50%;
   transform: scale(1.4);
+}
+
+@media only screen and (max-width: 1619px) {
+
+.elementsItem {
+    min-width: 490px;
+    width: 48%;
+}
+
+}
+@media only screen and (max-width: 1259px) {
+
+.elementsItem {
+    width: 100%;
+    min-width: none;
+}
+
 }
 
 @media only screen and (max-width: 700px) {
