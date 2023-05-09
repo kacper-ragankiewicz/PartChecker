@@ -11,36 +11,93 @@ import mark from "../styles/assets/mark.png";
 import error from "../styles/assets/error.png";
 import processor from "../styles/assets/processor.jpeg";
 import processed from "../styles/assets/processed.png";
+import { arrayBuffer } from 'stream/consumers';
+
+type MyElementArray= {
+  id: number,
+  name: string,
+  detail: string
+}
 
 export default function Home() {
   const [status, setStatus] = useState(true)
+  const [search, setSearch] = useState("")
+  const [searchArray, setSearchArray] = useState([
+    {
+      id: 1,
+      name: 'Procesor',
+      detail: 'AMD RAR 5 5600'
+    },
+    {
+      id: 2,
+      name: 'Procesor',
+      detail: 'AMD RAR 5 5600'
+    },
+  ])
+  const [elementArray, setElementArray] = useState([
+    {
+      id: 1,
+      name: 'Procesor',
+      detail: 'AMD RAR 5 5600'
+    },
+    {
+      id: 2,
+      name: 'Procesor',
+      detail: 'D RAZER 5 5600'
+    },
+    {
+      id: 3,
+      name: 'Procesor',
+      detail: 'AMD RAZER 5 50'
+    },
+    {
+      id: 4,
+      name: 'Procesor',
+      detail: 'AMD ZER 5 5600'
+    },
+    {
+      id: 5,
+      name: 'Procesor',
+      detail: 'AMD RAZER 5 5600'
+    },
+    {
+      id: 6,
+      name: 'Procesor',
+      detail: 'AMD RAZER 600'
+    },
+  ])
 
-  const elementArray = [
-    {
-      name: 'Procesor',
-      detail: 'AMD RAZER 5 5600'
-    },
-    {
-      name: 'Procesor',
-      detail: 'AMD RAZER 5 5600'
-    },
-    {
-      name: 'Procesor',
-      detail: 'AMD RAZER 5 5600'
-    },
-    {
-      name: 'Procesor',
-      detail: 'AMD RAZER 5 5600'
-    },
-    {
-      name: 'Procesor',
-      detail: 'AMD RAZER 5 5600'
-    },
-    {
-      name: 'Procesor',
-      detail: 'AMD RAZER 5 5600'
-    },
-  ]
+  console.log(search)
+
+
+
+  const removeElement = (id: number) => {
+    let array = elementArray.filter(item => item.id !== id)
+
+    return setElementArray(array)
+  }
+
+  const addElement = (object: { id: number, name: string, detail: string}) => {
+    setSearch("")
+
+    if (typeof window !== 'undefined') {
+      const newLocal = document.getElementById('search')
+      newLocal.value = ''
+    }
+
+    let array = elementArray
+
+    array.push(object)
+
+    return setElementArray(array)
+  }
+
+
+
+  const handleInputChange = (event: any) => {
+    setSearch(event.target.value);
+  }
+
 
   const ElementsGenerator = (props: any) => {
 
@@ -48,7 +105,7 @@ export default function Home() {
       <li key={props.key} className={styles.elementsItem}>
         <div className={styles.elementHeader}>
           <h2 className={styles.elementName}>{props.name}</h2>
-          <div className={styles.removeElementButton}>
+          <div onClick={() => removeElement(props.id)} className={styles.removeElementButton}>
           <Image
             src={error}
             width={48}
@@ -84,7 +141,27 @@ export default function Home() {
     )
   }
 
-  const elementList = elementArray.map(item => <ElementsGenerator key={item.name} name={item.name} detail={item.detail}/>)
+  const SearchGenerator = (props: any) => {
+    return(
+      <li key={props.key} className={styles.searchItem} onClick={() => addElement(props.id)}>
+        <div className={styles.searchImgContainer}>
+          <Image
+            src={processor}
+            width={190}
+            height={190}
+            alt='Element IMG'
+            priority
+            className={styles.elementImg}
+          />
+        </div>
+        <h3>{props.name}</h3>
+        <p>{props.detail}</p>
+      </li>
+    )
+  }
+
+  const elementList = elementArray.map(item => <ElementsGenerator key={item.name} id={item.id} name={item.name} detail={item.detail}/>)
+  const searchList = searchArray.map(item => <SearchGenerator key={item.name} id={item.id} name={item.name} detail={item.detail}/>)
 
 
 
@@ -109,7 +186,17 @@ export default function Home() {
             />
           </div>
           <form className={styles.form}>
-              <input type='text' name='search' placeholder='SZUKAJ CZĘŚCI...' className={styles.searchBar}/>
+              <input type='text' id="search" onChange={handleInputChange} name='search' placeholder='SZUKAJ CZĘŚCI...' className={styles.searchBar}/>
+              { search !== ""
+              ?
+                <div className={styles.searchBox}>
+                  <ul className={styles.searchList}>
+                    {searchList}
+                  </ul>
+                </div>
+              :
+                " "
+              }
           </form>
         </nav>
         <div className={styles.wrapper}>
