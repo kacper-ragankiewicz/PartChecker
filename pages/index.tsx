@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -77,13 +77,14 @@ export default function Home() {
     return setElementArray(array)
   }
 
+
   const addElement = (object: { id: number, name: string, detail: string}) => {
     setSearch("")
 
-    if (typeof window !== 'undefined') {
-      const newLocal = document.getElementById('search')
-      newLocal.value = ''
-    }
+    // if (typeof window !== 'undefined') {
+    //   const newLocal = document.getElementById('search')
+    //   newLocal.value = ''
+    // }
 
     let array = elementArray
 
