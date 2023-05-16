@@ -13,11 +13,14 @@ import processor from "../styles/assets/processor.jpeg";
 import processed from "../styles/assets/processed.png";
 import { arrayBuffer } from 'stream/consumers';
 
-type MyElementArray= {
-  id: number,
-  name: string,
-  detail: string
+interface MyElement {
+  id: number;
+  kod: string;
+  name: string;
+  detail: string;
 }
+
+type MyElementArray = MyElement[]
 
 export default function Home() {
   const [status, setStatus] = useState(true)
@@ -25,11 +28,13 @@ export default function Home() {
   const [searchArray, setSearchArray] = useState([
     {
       id: 1,
+      kod: 'sajhasdf',
       name: 'Procesor',
       detail: 'AMD RAR 5 5600'
     },
     {
-      id: 2,
+      id: 8,
+      kod: 'kasdjhuih',
       name: 'Procesor',
       detail: 'AMD RAR 5 5600'
     },
@@ -37,66 +42,86 @@ export default function Home() {
   const [elementArray, setElementArray] = useState([
     {
       id: 1,
+      kod: 'sajhasdf',
       name: 'Procesor',
       detail: 'AMD RAR 5 5600'
     },
     {
       id: 2,
+      kod: 'sakjdhfkjsahdf',
       name: 'Procesor',
       detail: 'D RAZER 5 5600'
     },
     {
       id: 3,
+      kod: 'kasldjflksdhg;h',
       name: 'Procesor',
       detail: 'AMD RAZER 5 50'
     },
     {
       id: 4,
+      kod: 'kasdjhfkj',
       name: 'Procesor',
       detail: 'AMD ZER 5 5600'
     },
     {
       id: 5,
+      kod: 'klsadjhkuhi',
       name: 'Procesor',
       detail: 'AMD RAZER 5 5600'
     },
     {
       id: 6,
+      kod: 'askldjfjklsdf',
       name: 'Procesor',
       detail: 'AMD RAZER 600'
     },
   ])
 
-  console.log(search)
-
-
 
   const removeElement = (id: number) => {
     let array = elementArray.filter(item => item.id !== id)
+    for ( let i = 0; i <= array.length - 1; i++) {
+      array[i].id = i + 1
+    }
 
-    return setElementArray(array)
+    setElementArray(array)
+
+    return filterSearchArray()
+  }
+
+  const filterSearchArray = () => {
+    const serchFiltered = searchArray.filter(item => !elementArray.some(element => element['kod'] === item['kod']));
+    return setSearchArray(serchFiltered)
   }
 
 
-  const addElement = (object: { id: number, name: string, detail: string}) => {
-    setSearch("")
+  const addElement = (id: number) => {
+      setSearch("")
+      // if (typeof window !== 'undefined') {
+      //   const newLocal = document.getElementById('search')
+      //   newLocal.value = ''
+      // }
+      let array: MyElement[] = [...elementArray]
+      let search: MyElement[] = [...searchArray]
+      let index  = search.findIndex(item => id === item.id);
 
-    // if (typeof window !== 'undefined') {
-    //   const newLocal = document.getElementById('search')
-    //   newLocal.value = ''
-    // }
+      search[index] = {...searchArray[index], id: elementArray.length}
 
-    let array = elementArray
+      array.push(search[index])
 
-    array.push(object)
+      for ( let i = 0; i <= array.length - 1; i++) {
+        array[i].id = i + 1
+      }
 
-    return setElementArray(array)
-  }
-
-
+      setElementArray(array)
+      return
+    }
 
   const handleInputChange = (event: any) => {
     setSearch(event.target.value);
+
+    return filterSearchArray()
   }
 
 
@@ -105,7 +130,7 @@ export default function Home() {
     return(
       <li key={props.key} className={styles.elementsItem}>
         <div className={styles.elementHeader}>
-          <h2 className={styles.elementName}>{props.name}</h2>
+          <h2 className={styles.elementName}>{props.name}{props.kod}</h2>
           <div onClick={() => removeElement(props.id)} className={styles.removeElementButton}>
           <Image
             src={error}
@@ -155,14 +180,14 @@ export default function Home() {
             className={styles.elementImg}
           />
         </div>
-        <h3>{props.name}</h3>
+        <h3>{props.kod}</h3>
         <p>{props.detail}</p>
       </li>
     )
   }
 
-  const elementList = elementArray.map(item => <ElementsGenerator key={item.name} id={item.id} name={item.name} detail={item.detail}/>)
-  const searchList = searchArray.map(item => <SearchGenerator key={item.name} id={item.id} name={item.name} detail={item.detail}/>)
+  const elementList = elementArray.map(item => <ElementsGenerator key={item.name} id={item.id} name={item.name} detail={item.detail} kod={item.kod}/>)
+  const searchList = searchArray.map(item => <SearchGenerator key={item.name} id={item.id} name={item.name} detail={item.detail} kod={item.kod}/>)
 
 
 
