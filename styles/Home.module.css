@@ -113,6 +113,10 @@
   font-size: 1.4rem;
 }
 
+.outsideAlert {
+  width: 100%;
+}
+
 .statusContainer {
   display: flex;
   justify-content: center;

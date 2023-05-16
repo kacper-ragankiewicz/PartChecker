@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useState, useEffect } from 'react'
+import OutsideAlerter from '@/components/Outside'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -95,13 +96,13 @@ export default function Home() {
     return setSearchArray(serchFiltered)
   }
 
+  const clearSearch = () => {
+    return setSearch("")
+  }
+
 
   const addElement = (id: number) => {
       setSearch("")
-      // if (typeof window !== 'undefined') {
-      //   const newLocal = document.getElementById('search')
-      //   newLocal.value = ''
-      // }
       let array: MyElement[] = [...elementArray]
       let search: MyElement[] = [...searchArray]
       let index  = search.findIndex(item => id === item.id);
@@ -130,7 +131,7 @@ export default function Home() {
     return(
       <li key={props.key} className={styles.elementsItem}>
         <div className={styles.elementHeader}>
-          <h2 className={styles.elementName}>{props.name}{props.kod}</h2>
+          <h2 className={styles.elementName}>{props.name}</h2>
           <div onClick={() => removeElement(props.id)} className={styles.removeElementButton}>
           <Image
             src={error}
@@ -180,7 +181,7 @@ export default function Home() {
             className={styles.elementImg}
           />
         </div>
-        <h3>{props.kod}</h3>
+        <h3>{props.name}</h3>
         <p>{props.detail}</p>
       </li>
     )
@@ -200,7 +201,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
+        <OutsideAlerter
+          className={styles.outsideAlert}
+          change={() => clearSearch()}
+        >
         <nav className={styles.navbarContainer}>
+
           <h1 className={styles.logoContainer}>Dopasuj<span>CZĘŚĆ</span></h1>
           <div className={styles.loopImgContainer}>
             <Image
@@ -212,7 +218,7 @@ export default function Home() {
             />
           </div>
           <form className={styles.form}>
-              <input type='text' id="search" onChange={handleInputChange} name='search' placeholder='SZUKAJ CZĘŚCI...' className={styles.searchBar}/>
+              <input type='text' id="search" onChange={handleInputChange} value={search} name='search' placeholder='SZUKAJ CZĘŚCI...' className={styles.searchBar}/>
               { search !== ""
               ?
                 <div className={styles.searchBox}>
@@ -225,6 +231,7 @@ export default function Home() {
               }
           </form>
         </nav>
+        </OutsideAlerter>
         <div className={styles.wrapper}>
           <div className={styles.wrapperHeader}>
             <h1 className={styles.header}>TWOJE CZĘŚCI KOMPUTEROWE:</h1>
