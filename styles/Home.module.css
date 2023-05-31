@@ -141,6 +141,10 @@
   align-items: center;
 }
 
+.submitButton {
+  display: none;
+}
+
 .errorImg {
   margin: 0;
   padding: 0;

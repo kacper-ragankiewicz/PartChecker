@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useState, useEffect } from 'react'
 import OutsideAlerter from '@/components/Outside'
+import { useRouter } from "next/router"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,87 +15,58 @@ import processor from "../styles/assets/processor.jpeg";
 import processed from "../styles/assets/processed.png";
 import { arrayBuffer } from 'stream/consumers';
 
-interface MyElement {
+interface elementType {
   id: number;
-  kod: string;
   name: string;
-  detail: string;
+  description: string;
+  type: number;
+  standard:  number;
+  price: string;
 }
 
-type MyElementArray = MyElement[]
+interface typesType {
+  [key: string]: string;
+}
+
+type MyElementArray = elementType[]
 
 export default function Home() {
+  const router = useRouter()
+  
   const [status, setStatus] = useState(true)
   const [search, setSearch] = useState("")
-  const [searchArray, setSearchArray] = useState([
-    {
-      id: 1,
-      kod: 'sajhasdf',
-      name: 'Procesor',
-      detail: 'AMD RAR 5 5600'
-    },
-    {
-      id: 8,
-      kod: 'kasdjhuih',
-      name: 'Procesor',
-      detail: 'AMD RAR 5 5600'
-    },
-  ])
-  const [elementArray, setElementArray] = useState([
-    {
-      id: 1,
-      kod: 'sajhasdf',
-      name: 'Procesor',
-      detail: 'AMD RAR 5 5600'
-    },
-    {
-      id: 2,
-      kod: 'sakjdhfkjsahdf',
-      name: 'Procesor',
-      detail: 'D RAZER 5 5600'
-    },
-    {
-      id: 3,
-      kod: 'kasldjflksdhg;h',
-      name: 'Procesor',
-      detail: 'AMD RAZER 5 50'
-    },
-    {
-      id: 4,
-      kod: 'kasdjhfkj',
-      name: 'Procesor',
-      detail: 'AMD ZER 5 5600'
-    },
-    {
-      id: 5,
-      kod: 'klsadjhkuhi',
-      name: 'Procesor',
-      detail: 'AMD RAZER 5 5600'
-    },
-    {
-      id: 6,
-      kod: 'askldjfjklsdf',
-      name: 'Procesor',
-      detail: 'AMD RAZER 600'
-    },
-  ])
-
-
+  const [searchArray, setSearchArray] = useState([])
+  const [elementArray, setElementArray] = useState([])
+  
+  const types: typesType = {
+    '2': 'Processor'
+  }
+  
+  
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`/api/search?q=${search}`);
+      if (response.ok) {
+        const data = await response.json();
+        setSearchArray(data);
+      } else {
+        console.error('Failed to fetch search results');
+      }
+    } catch (error) {
+      console.error('An error occurred', error);
+    }
+  };
   const removeElement = (id: number) => {
-    let array = elementArray.filter(item => item.id !== id)
-    for ( let i = 0; i <= array.length - 1; i++) {
-      array[i].id = i + 1
+      let array = elementArray.filter(item => item.id !== id)
+    
+      setElementArray(array)
+      // filterSearchArray()
     }
 
-    setElementArray(array)
-
-    return filterSearchArray()
-  }
-
-  const filterSearchArray = () => {
-    const serchFiltered = searchArray.filter(item => !elementArray.some(element => element['kod'] === item['kod']));
-    return setSearchArray(serchFiltered)
-  }
+  // const filterSearchArray = () => {
+  //   const serchFiltered = searchArray.filter(item => !elementArray.some(element => element['id'] === item['id']));
+  //   return setSearchArray(serchFiltered)
+  // }
 
   const clearSearch = () => {
     return setSearch("")
@@ -103,35 +75,32 @@ export default function Home() {
 
   const addElement = (id: number) => {
       setSearch("")
-      let array: MyElement[] = [...elementArray]
-      let search: MyElement[] = [...searchArray]
+      let array: elementType[] = [...elementArray]
+      let search: elementType[] = [...searchArray]
       let index  = search.findIndex(item => id === item.id);
 
-      search[index] = {...searchArray[index], id: elementArray.length}
-
       array.push(search[index])
-
-      for ( let i = 0; i <= array.length - 1; i++) {
-        array[i].id = i + 1
-      }
-
       setElementArray(array)
-      return
-    }
+  }
 
   const handleInputChange = (event: any) => {
     setSearch(event.target.value);
-
-    return filterSearchArray()
   }
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    fetchData();
+  };
 
-  const ElementsGenerator = (props: any) => {
+
+
+  const ElementsGenerator = (props: elementType) => {
+    let type = props.type.toString()
 
     return(
-      <li key={props.key} className={styles.elementsItem}>
+      <li className={styles.elementsItem}>
         <div className={styles.elementHeader}>
-          <h2 className={styles.elementName}>{props.name}</h2>
+          <h2 className={styles.elementName}>{types[type]}</h2>
           <div onClick={() => removeElement(props.id)} className={styles.removeElementButton}>
           <Image
             src={error}
@@ -143,8 +112,8 @@ export default function Home() {
             />
           </div>
         </div>
-        <h3 className={styles.elementDetail}>{props.detail}</h3>
-        <div className={styles.elementImgContainer}>
+        <h3 className={styles.elementDetail}>{props.name}</h3>
+        {/* <div className={styles.elementImgContainer}>
           <Image
             src={processor}
             width={190}
@@ -153,7 +122,7 @@ export default function Home() {
             priority
             className={styles.elementImg}
           />
-        </div>
+        </div> */}
         <div className={styles.elementMark}>
           <Image
             src={processed}
@@ -171,7 +140,7 @@ export default function Home() {
   const SearchGenerator = (props: any) => {
     return(
       <li key={props.key} className={styles.searchItem} onClick={() => addElement(props.id)}>
-        <div className={styles.searchImgContainer}>
+        {/* <div className={styles.searchImgContainer}>
           <Image
             src={processor}
             width={190}
@@ -180,17 +149,17 @@ export default function Home() {
             priority
             className={styles.elementImg}
           />
-        </div>
+        </div> */}
         <h3>{props.name}</h3>
         <p>{props.detail}</p>
       </li>
     )
   }
 
-  const elementList = elementArray.map(item => <ElementsGenerator key={item.name} id={item.id} name={item.name} detail={item.detail} kod={item.kod}/>)
-  const searchList = searchArray.map(item => <SearchGenerator key={item.name} id={item.id} name={item.name} detail={item.detail} kod={item.kod}/>)
+  const elementList = elementArray.map((item, index)=> <ElementsGenerator key={index} {...item}/>)
+  const searchList = searchArray.map((item, index) => <SearchGenerator key={index} {...item}/>)
 
-
+  console.log(elementArray)
 
   return (
     <>
@@ -217,8 +186,8 @@ export default function Home() {
               className={styles.loopIMG}
             />
           </div>
-          <form className={styles.form}>
-              <input type='text' id="search" onChange={handleInputChange} value={search} name='search' placeholder='SZUKAJ CZĘŚCI...' className={styles.searchBar}/>
+          <form onSubmit={handleSubmit} className={styles.form}>
+              <input type='text' id="type" onChange={handleInputChange} value={search} name='type' placeholder='SZUKAJ CZĘŚCI...' className={styles.searchBar}/>
               { search !== ""
               ?
                 <div className={styles.searchBox}>
@@ -229,6 +198,7 @@ export default function Home() {
               :
                 " "
               }
+              <button className={styles.submitButton} type="submit">Submit</button>
           </form>
         </nav>
         </OutsideAlerter>
