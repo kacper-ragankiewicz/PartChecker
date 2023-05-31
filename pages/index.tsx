@@ -35,8 +35,8 @@ export default function Home() {
   
   const [status, setStatus] = useState(true)
   const [search, setSearch] = useState("")
-  const [searchArray, setSearchArray] = useState([])
-  const [elementArray, setElementArray] = useState([])
+  const [searchArray, setSearchArray] = useState<elementType[]>([])
+  const [elementArray, setElementArray] = useState<elementType[]>([])
   
   const types: typesType = {
     '2': 'Processor'
