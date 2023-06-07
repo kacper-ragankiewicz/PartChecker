@@ -31,6 +31,7 @@
   position: relative;
 }
 
+
 .logoContainer span {
   color: #fff;
 }
@@ -87,6 +88,34 @@
   letter-spacing: -0.2em;
 }
 
+.typeSelect {
+  height: 90%;
+  display: flex;
+  max-width: 110px;
+  align-items: center;
+  margin-right: 10px;
+  color: #000;
+  border: none;
+  font-family: NerdFont;
+  font-weight: 600;
+  font-size: .8rem;
+  letter-spacing: -3px;
+}
+
+.typeSelect select {
+  padding: 10px 13px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #159895;
+  border-radius: 15px;
+  color: #333;
+  -moz-appearance: none; /* Remove default arrow */
+  -webkit-appearance: none;
+  color: #fff;
+  appearance: none;
+}
+
 .wrapper {
   max-width: 2000px;
   width: 100%;
@@ -103,6 +132,7 @@
   justify-content: space-between;
   align-items: center;
   border-radius: 15px;
+  padding: 10px 30px;
   z-index: 100;
   width: 100%;
   background: #fff;
@@ -116,6 +146,8 @@
 
 .outsideAlert {
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .statusContainer {
@@ -140,6 +172,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.checkButton {
+  background: #00fd0d;
+  font-size: 1.1rem;
+  padding: 15px 1rem;
+  border-radius: 15px;
+  color: #000;
+  border: 4px solid #3be610;
 }
 
 .submitButton {
@@ -280,15 +321,27 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  align-content: flex-start;
+  align-content: center;
+  /* border: 5px solid #159895; */
+  border-top: 0px;
+  border-radius: 15px;
 }
 
 .searchItem {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
   list-style: none;
-  width: 90%;
-  margin: 3%;
+  margin: 10px;
   padding: 1%;
-  background-color: #dadada;
+  /* border: 1px solid #159895; */
+  background-color: #e2e2e2;
+  border-radius: 15px;
+}
+
+.searchType {
+  background-color: #33d341;
+  padding: 5px 20px;
   border-radius: 15px;
 }
 

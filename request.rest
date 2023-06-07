@@ -10,5 +10,5 @@
 # GET https://pccfg.truffel.dev/api/component-list?type=CPU HTTP/1.1
 # content-type: application/json
 
-GET https://pccfg.truffel.dev/api/search?q=Razen HTTP/1.1
+GET https://pccfg.truffel.dev/api/component-list?type=2 HTTP/1.1
 content-type: application/json

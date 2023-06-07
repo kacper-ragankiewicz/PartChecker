@@ -37,10 +37,20 @@ export default function Home() {
   const [search, setSearch] = useState("")
   const [searchArray, setSearchArray] = useState<elementType[]>([])
   const [elementArray, setElementArray] = useState<elementType[]>([])
+  const [selectedOption, setSelectedOption] = useState('');
 
   const types: typesType = {
+    '0': 'Wybierz Typ',
     '2': 'Processor'
   }
+
+
+  const handleSelectChange = (e: any) => {
+    setSelectedOption(e.target.value);
+    console.log(e)
+    // router.push(`/submit?mySelect=${event.target.value}`);
+  };
+
 
   const fetchData = async () => {
     try {
@@ -150,16 +160,19 @@ export default function Home() {
           />
         </div> */}
         <h3>{props.name}</h3>
-        <p>{props.detail}</p>
+        <p className={styles.searchType} >{types[props.type]}</p>
       </li>
     )
   }
 
+  const typesArray = Object.values(types)
+
   const elementList = elementArray.map((item, index)=> <ElementsGenerator key={index} {...item}/>)
   const searchList = searchArray.map((item, index) => <SearchGenerator key={index} {...item}/>)
+  const selectList = typesArray.map(item => <option key={item} value={item}>{item}</option>)
 
   console.log(elementArray)
-
+ 
   return (
     <>
       <Head>
@@ -199,12 +212,22 @@ export default function Home() {
               }
               <button className={styles.submitButton} type="submit">Submit</button>
           </form>
+          <form className={styles.typeSelect} id="myForm" action="/submit" method="POST">
+            <select
+              id="mySelect"
+              name="mySelect"
+              value={selectedOption}
+              onChange={handleSelectChange}
+            >
+                {selectList}
+            </select>
+          </form>
         </nav>
         </OutsideAlerter>
         <div className={styles.wrapper}>
           <div className={styles.wrapperHeader}>
             <h1 className={styles.header}>TWOJE CZĘŚCI KOMPUTEROWE:</h1>
-            { status ? 
+            { status ?
                 <div className={styles.statusContainer}>
                   <h1 className={styles.status}>STATUS:</h1>
                   { status
