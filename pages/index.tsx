@@ -32,17 +32,16 @@ type MyElementArray = elementType[]
 
 export default function Home() {
   const router = useRouter()
-  
-  const [status, setStatus] = useState(true)
+
+  const [status, setStatus] = useState(false)
   const [search, setSearch] = useState("")
   const [searchArray, setSearchArray] = useState<elementType[]>([])
   const [elementArray, setElementArray] = useState<elementType[]>([])
-  
+
   const types: typesType = {
     '2': 'Processor'
   }
-  
-  
+
   const fetchData = async () => {
     try {
       const response = await fetch(`/api/search?q=${search}`);
@@ -58,7 +57,7 @@ export default function Home() {
   };
   const removeElement = (id: number) => {
       let array = elementArray.filter(item => item.id !== id)
-    
+
       setElementArray(array)
       // filterSearchArray()
     }
@@ -205,34 +204,37 @@ export default function Home() {
         <div className={styles.wrapper}>
           <div className={styles.wrapperHeader}>
             <h1 className={styles.header}>TWOJE CZĘŚCI KOMPUTEROWE:</h1>
-            <div className={styles.statusContainer}>
-              <h1 className={styles.status}>STATUS:</h1>
-              { status
-              ?
-                <div className={styles.correct}>
-                  <Image
-                    src={mark}
-                    width={48}
-                    height={48}
-                    alt='good IMG'
-                    priority
-                    className={styles.correctImg}
-                  />
+            { status ? 
+                <div className={styles.statusContainer}>
+                  <h1 className={styles.status}>STATUS:</h1>
+                  { status
+                  ?
+                    <div className={styles.correct}>
+                      <Image
+                        src={mark}
+                        width={48}
+                        height={48}
+                        alt='good IMG'
+                        priority
+                        className={styles.correctImg}
+                      />
+                    </div>
+                  :
+                    <div className={styles.error}>
+                      <Image
+                        src={error}
+                        width={48}
+                        height={48}
+                        alt='error IMG'
+                        priority
+                        className={styles.errorImg}
+                      />
+                    </div>
+                  }
                 </div>
-              :
-                <div className={styles.error}>
-                  <Image
-                    src={error}
-                    width={48}
-                    height={48}
-                    alt='error IMG'
-                    priority
-                    className={styles.errorImg}
-                  />
-                </div>
-              }
+                : ''
+            }
             </div>
-          </div>
           <div className={styles.elemetsListWrapper}>
             <ul className={styles.elementsList}>
               {elementList}

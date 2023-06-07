@@ -72,12 +72,13 @@
   height: 70%;
   border-radius: 15px;
   padding: 10px;
+  letter-spacing: -4px;
   font-family: NerdFont; 
   font-size: 1.1rem;
 }
 
 .searchBar:focus {
-  outline: 1px solid #159895;
+  outline: none;
 }
 
 .searchBar::placeholder {
