@@ -57,15 +57,15 @@ npx create-next-app my-next-app
 
 Po utworzeniu projektu, otrzymamy gotową strukturę plików. W głównym katalogu projektu będziemy mieli następujące pliki i foldery:
 
-    pages/: Ten folder zawiera pliki, które definiują różne strony aplikacji. Pliki w tym folderze są renderowane jako strony dostępne pod odpowiednimi ścieżkami URL.
+  - **pages/**: Ten folder zawiera pliki, które definiują różne strony aplikacji. Pliki w tym folderze są renderowane jako strony dostępne pod odpowiednimi ścieżkami URL.
 
-    public/: W tym folderze znajdują się pliki statyczne, takie jak obrazy, ikony, pliki CSS itp., które można używać w aplikacji.
+  - **public/**: W tym folderze znajdują się pliki statyczne, takie jak obrazy, ikony, pliki CSS itp., które można używać w aplikacji.
 
-    styles/: Ten folder może zawierać pliki stylów CSS lub SASS, które będą używane w projekcie.
+  - **styles/**: Ten folder może zawierać pliki stylów CSS lub SASS, które będą używane w projekcie.
 
-    components/: Możemy utworzyć ten folder w celu przechowywania komponentów React, które będą używane w różnych miejscach w aplikacji.
+  - **components/**: Możemy utworzyć ten folder w celu przechowywania komponentów React, które będą używane w różnych miejscach w aplikacji.
 
-    next.config.js: Ten plik zawiera konfigurację dla Next.js, taką jak dodatkowe moduły, ścieżki aliasów, przepisy dla kompilatora itp.
+  - **next.config.js**: Ten plik zawiera konfigurację dla Next.js, taką jak dodatkowe moduły, ścieżki aliasów, przepisy dla kompilatora itp.
 
 3. **Tworzenie stron**
 
