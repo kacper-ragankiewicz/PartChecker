@@ -81,7 +81,12 @@ Next.js umożliwia również używanie modułów CSS, gdzie style są związane 
 
 5. **Uruchomienie aplikacji**
 
-Aby uruchomić aplikację, używamy komendy yarn dev.
+Aby uruchomić aplikację, używamy komend:
+
+```
+  $ yarn install
+  $ yarn dev
+```
 
 <br />
 
@@ -341,8 +346,6 @@ Komponent Home zwraca strukturę JSX, która renderuje główny kontener main z 
 <br />
 
 # Stylistyka.
-
-## Pliki
 
 **global.css** - ogólne zasady stylistyczne dla dokumentu
 
