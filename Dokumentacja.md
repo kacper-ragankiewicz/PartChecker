@@ -181,13 +181,8 @@ Zdefiniowana została funkcja **handler**, która obsługuje żądanie **API**. 
 
 To jest ogólna dokumentacja dla pliku search.js w API.
 
-<br />
 
-### **Wyszukanie**:
-
-<br />
-
-## /api/search <- fetchData(string)
+## **Wyszukanie**: /api/search <- fetchData(string)
 
 dataset:
 ```
@@ -207,10 +202,10 @@ dataset:
 
 # Zasada działania.
 
-## **Kolejka zdarzeń**
+### **Kolejka zdarzeń**
 <br />
 
-### handleInput(e) -> search(string) -> handlesubmit(search) -> searchArray[] -> searchGenerator</br> -> searchList() -> addElement(id) -> elementArray[] -> elementGenerator</> -> elementList() -> filterSearch(obj) ->  removeElement(id)
+handleInput(e) -> search(string) -> handlesubmit(search) -> searchArray[] -> searchGenerator</br> -> searchList() -> addElement(id) -> elementArray[] -> elementGenerator</> -> elementList() -> filterSearch(obj) ->  removeElement(id)
 
 <br />
 
