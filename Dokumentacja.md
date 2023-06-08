@@ -121,21 +121,27 @@ Warto pamiętać, że w większych projektach może istnieć więcej plików i k
 
 # Interfacy bazowe.
 
-### **searchPhraze**: string - *czego szukamy*
+**searchPhraze**:       string  - *czego szukamy*
 
-### **searchArray**: 		obj[] 	- *elementy które się wyświetlają po wyszukaniu*
-### **elementArray**: 		obj[] 	- *elementy wybrane po wyszukaniu*
+**searchArray**: 		    obj[] 	- *elementy które się wyświetlają po wyszukaniu*
 
-### **handleInputChange** 	(e) 	- *api wyłapuje co użytkowik wpisuje*
-### **handleSubmit** 		(e) 	- *api wyłapuje przycisk wysłania*
+**elementArray**: 		  obj[] 	- *elementy wybrane po wyszukaniu*
 
-### **elementGenerator** 	</> 	- *wyświetla dane z elementList*
-### **searchGenerator** 	</> 	- *wyświetla dane z zdobyte z funkcji serch*
+**handleInputChange** 	(e) 	  - *api wyłapuje co użytkowik wpisuje*
 
-### **elementLlist**: 		(obj) 	- *generator elementów interfjesu*
-### **searchListL** 		(obj) 	- *generator elementów wyszukania*
-### **addElement** 		(obj)	- *dodawanie elementów wyszukanych do list elementów*
-### **filterSearch**		(obj)	- *filtracja wyszukania.*
+**handleSubmit** 		    (e) 	  - *api wyłapuje przycisk wysłania*
+
+**elementGenerator** 	  </> 	  - *wyświetla dane z elementList*
+
+**searchGenerator** 	  </> 	  - *wyświetla dane z zdobyte z funkcji serch*
+
+**elementLlist**: 		  (obj) 	- *generator elementów interfjesu*
+
+**searchListL** 		    (obj) 	- *generator elementów wyszukania*
+
+**addElement** 		      (obj)	  - *dodawanie elementów wyszukanych do list elementów*
+
+**filterSearch**		    (obj)	  - *filtracja wyszukania.*
 
 <br />
 
