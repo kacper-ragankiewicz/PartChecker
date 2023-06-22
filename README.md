@@ -1,3 +1,9 @@
+# Auto code review
+
+[![codebeat badge](https://codebeat.co/badges/73a14966-7af4-4392-8d46-c6820562a1e1)](https://codebeat.co/projects/github-com-kacper-ragankiewicz-partchecker-main)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/44eef8dce935421f8cfbd86e6c16acc9)](https://app.codacy.com/gh/kacper-ragankiewicz/PartChecker/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+
 # **Dokumentacja DopasujCZĘŚĆ**
 
 ### Witaj w dokumentacji projektu! Ta dokumentacja zapewnia wgląd w projekt oraz jego składniki, w tym kluczowe pliki, funkcjonalności i wytyczne dotyczące rozwoju. Jej celem jest pomoc programistom w zrozumieniu struktury projektu oraz ułatwienie przyszłej konserwacji i współpracy.
